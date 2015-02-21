@@ -1,0 +1,6 @@
+[logstash-{{ logstash_version }}]
+name=logstash repository for {{ logstash_version }}.x packages
+baseurl=http://packages.elasticsearch.org/logstash/{{ logstash_version }}/centos
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/GPG-KEY-elasticsearch
+enabled=1

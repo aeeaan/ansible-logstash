@@ -1,2 +1,12 @@
 ---
-# tasks file for logstash
+- name: install logstash key
+  rpm_key: key=https://packages.elasticsearch.org/GPG-KEY-elasticsearch state=present
+  when: ansible_os_family == 'RedHat'
+
+- name: install logstash repo
+  template: src=logstash.repo.j2 dest=/etc/yum.repos.d/logstash.repo owner=root group=root mode=0644
+  when: ansible_os_family == 'RedHat'
+
+- name: install logstash
+  yum: name=logstash state=installed
+  when: ansible_os_family == 'RedHat'
