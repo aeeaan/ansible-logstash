@@ -1,0 +1,17 @@
+input {
+
+  file {
+    path => "/var/log/httpd/*access*log"
+    type => "apache-access"
+  }
+
+  file {
+    path => "/var/log/httpd/*error*log"
+    type => "apache-error"
+  }
+}
+
+output {
+  stdout { codec => rubydebug }
+  redis { host => "app1.irt.lan" data_type => "list" key => "logstash" }
+}
