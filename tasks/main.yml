@@ -10,3 +10,18 @@
 - name: install logstash
   yum: name=logstash state=installed
   when: ansible_os_family == 'RedHat'
+
+- name: configure indexer
+  template: src=indexer.conf.j2 dest=/etc/logstash/conf.d/indexer.conf
+  notify: restart logstash
+  when: ansible_os_family == 'RedHat' and logstash_indexer == true
+
+- name: configure shipper
+  template: src=shipper.conf.j2 dest=/etc/logstash/conf.d/shipper.conf
+  notify: restart logstash
+  when: ansible_os_family == 'RedHat' and logstash_shipper == true
+
+- name: ensure logstash is enabled
+  service: name=logstash enabled=yes
+  notify: restart logstash
+  when: ansible_os_family == 'RedHat'

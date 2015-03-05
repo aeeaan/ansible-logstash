@@ -1,3 +1,5 @@
 ---
 logstash_version: 1.4
+logstash_indexer: false
+logstash_shipper: true
 
