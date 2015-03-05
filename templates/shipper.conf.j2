@@ -13,5 +13,5 @@ input {
 
 output {
   stdout { codec => rubydebug }
-  redis { host => "app1.irt.lan" data_type => "list" key => "logstash" }
+  redis { host => "{{ logstash_redis_ip }}" data_type => "list" key => "logstash" }
 }
