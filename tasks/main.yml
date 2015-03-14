@@ -25,3 +25,6 @@
   service: name=logstash enabled=yes
   notify: restart logstash
   when: ansible_os_family == 'RedHat'
+
+- name: logstash acls
+  include: acls.yml

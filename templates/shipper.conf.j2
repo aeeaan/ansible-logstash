@@ -1,5 +1,6 @@
+# {{ ansible_managed }}
 input {
-
+{% if logstash_input_httpd %}
   file {
     path => "/var/log/httpd/*access*log"
     type => "apache-access"
@@ -9,6 +10,7 @@ input {
     path => "/var/log/httpd/*error*log"
     type => "apache-error"
   }
+{% endif %}
 }
 
 output {

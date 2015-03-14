@@ -3,3 +3,5 @@ logstash_version: 1.4
 logstash_indexer: false
 logstash_shipper: true
 
+#logstash shipper inputs
+logstash_input_httpd: false
