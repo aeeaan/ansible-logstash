@@ -2,3 +2,6 @@
 - name: set acl on httpd log dir
   acl: name=/var/log/httpd entity=logstash etype=user permissions=rx state=present
   when: logstash_shipper == true and logstash_input_httpd == true
+  tags:
+    - logstash
+    - configuration

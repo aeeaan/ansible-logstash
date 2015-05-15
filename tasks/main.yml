@@ -1,26 +1,50 @@
 ---
 - name: install logstash key
   rpm_key: key=https://packages.elasticsearch.org/GPG-KEY-elasticsearch state=present
+  tags:
+    - logstash
+    - repos
+    - packages
 
 - name: install logstash repo
   template: src=logstash.repo.j2 dest=/etc/yum.repos.d/logstash.repo owner=root group=root mode=0644
+  tags:
+    - logstash
+    - repos
+    - packages
 
 - name: install logstash
   yum: name=logstash state=installed
+  tags:
+    - logstash
+    - packages
 
 - name: configure indexer
   template: src=indexer.conf.j2 dest=/etc/logstash/conf.d/indexer.conf
   notify: restart logstash
   when: logstash_indexer == true
+  tags:
+    - logstash
+    - configuration
 
 - name: configure shipper
   template: src=shipper.conf.j2 dest=/etc/logstash/conf.d/shipper.conf
   notify: restart logstash
   when: logstash_shipper == true
+  tags:
+    - logstash
+    - configuration
 
 - name: ensure logstash is enabled
   service: name=logstash enabled=yes
   notify: restart logstash
+  tags:
+    - logstash
+    - configuration
+    - services
 
 - name: logstash acls
   include: acls.yml
+  tags:
+    - logstash
+    - configuration
