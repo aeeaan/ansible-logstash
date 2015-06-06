@@ -14,7 +14,7 @@
     - packages
 
 - name: install logstash
-  yum: name=logstash state=installed
+  yum: name=logstash state=present
   tags:
     - logstash
     - packages
